@@ -1,0 +1,22 @@
+---
+- name: Install PHP and extensions
+  apt:
+    name:
+      - php
+      - php-cli
+      - php-common
+      - php-mysql
+      - php-curl
+      - php-gd
+      - php-xml
+      - php-mbstring
+      - php-zip
+      - php-dom
+      - libapache2-mod-php
+    state: present
+    update_cache: yes
+
+- name: Restart Apache after PHP install
+  service:
+    name: apache2
+    state: restarted

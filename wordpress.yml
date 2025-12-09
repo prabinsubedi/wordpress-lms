@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: yes
+
+  roles:
+    - firewall
+    - apache
+    - php
+    - mysql
+    - wordpress

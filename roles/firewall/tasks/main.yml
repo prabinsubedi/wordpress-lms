@@ -1,0 +1,54 @@
+---
+
+# Check if UFW is installed
+- name: Check if UFW is installed
+  ansible.builtin.stat:
+    path: /usr/sbin/ufw
+  register: ufw_binary
+
+# Install UFW only if not installed
+- name: Install UFW (Debian/Ubuntu)
+  ansible.builtin.apt:
+    name: ufw
+    state: present
+    update_cache: yes
+  when: ufw_binary.stat.exists == false
+
+# Check UFW status once (enabled/disabled)
+- name: Check if UFW is active
+  ansible.builtin.command: ufw status
+  register: ufw_status
+  changed_when: false
+  failed_when: false
+
+# Add rules only if missing ------------------------------
+
+- name: Ensure SSH allowed
+  ansible.builtin.ufw:
+    rule: allow
+    name: OpenSSH
+    state: enabled
+  when: "'OpenSSH' not in ufw_status.stdout"
+
+- name: Ensure HTTP allowed
+  ansible.builtin.ufw:
+    rule: allow
+    port: 80
+    proto: tcp
+    state: enabled
+  when: "'80/tcp' not in ufw_status.stdout"
+
+- name: Ensure HTTPS allowed
+  ansible.builtin.ufw:
+    rule: allow
+    port: 443
+    proto: tcp
+    state: enabled
+  when: "'443/tcp' not in ufw_status.stdout"
+
+# Enable UFW only if currently disabled ------------------
+
+- name: Enable UFW firewall only if not active
+  ansible.builtin.ufw:
+    state: enabled
+  when: "'Status: active' not in ufw_status.stdout"

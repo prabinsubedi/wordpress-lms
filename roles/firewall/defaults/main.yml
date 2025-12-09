@@ -1,0 +1,9 @@
+---
+# Default firewall settings
+
+firewall_allow_ssh: true
+firewall_allow_http: true
+firewall_allow_https: true
+
+# Enable or disable firewall
+firewall_state: "enabled"

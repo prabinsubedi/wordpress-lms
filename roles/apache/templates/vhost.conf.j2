@@ -1,0 +1,12 @@
+<VirtualHost *:80>
+    ServerName {{ domain }}
+    DocumentRoot {{ install_dir }}
+
+    <Directory {{ install_dir }}>
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/{{ domain }}-error.log
+    CustomLog ${APACHE_LOG_DIR}/{{ domain }}-access.log combined
+</VirtualHost>
