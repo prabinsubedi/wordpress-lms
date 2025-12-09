@@ -1,0 +1,16 @@
+domain: "example.com"
+install_dir: "/var/www/lms/"
+ansible_python_interpreter: /usr/bin/python3
+wp_download_url: "https://wordpress.org/latest.tar.gz"
+
+db_name: "{{ vault_db_name}}"
+db_user: "{{ vault_db_user}}"
+db_password: "{{ vault_db_password}}"
+auth_key: "{{ vault_auth_key }}"
+secure_auth_key: "{{ vault_secure_auth_key }}"
+logged_in_key: "{{ vault_logged_in_key }}"
+nonce_key: "{{ vault_nonce_key }}"
+auth_salt: "{{ vault_auth_salt }}"
+secure_auth_salt: "{{ vault_secure_auth_salt }}"
+logged_in_salt: "{{ vault_logged_in_salt }}"
+nonce_salt: "{{ vault_nonce_salt }}"

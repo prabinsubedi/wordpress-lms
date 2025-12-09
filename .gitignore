@@ -6,9 +6,9 @@ vault_password.txt
 .vault_pass.txt
 secrets.yml
 passwords.yml
+vault.yml
 
 # Group and host variables (often contain secrets)
-group_vars/*
 host_vars/*
 # Uncomment the next lines if you want to track non-sensitive group_vars
 #!group_vars/all.yml
